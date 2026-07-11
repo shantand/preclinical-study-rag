@@ -10,9 +10,6 @@ The project demonstrates the core building blocks of a RAG system:
 - Vector database (ChromaDB)
 - Semantic retrieval
 - LLM-powered answer generation
-
-The objective of this project was **to understand how modern RAG systems work** by building one from scratch with minimal abstractions.
-
 ---
 
 ## Motivation
@@ -52,7 +49,7 @@ Instead of manually reading multiple papers, this application retrieves the most
       Semantic Retrieval
                   │
                   ▼
-             Local / OpenAI LLM
+             OpenAI LLM
                   │
                   ▼
             Grounded Answer
@@ -62,13 +59,13 @@ Instead of manually reading multiple papers, this application retrieves the most
 
 ## Tech Stack
 
-| Component | Technology |
+| Component |   Technology |
 |----------|------------|
 | Language | Python 3.12 |
 | PDF Parsing | PyMuPDF |
 | Embeddings | sentence-transformers (`all-MiniLM-L6-v2`) |
 | Vector Database | ChromaDB |
-| LLM | Ollama (Gemma/Qwen) or OpenAI |
+| LLM | OpenAI |
 | Retrieval | Cosine Similarity Search |
 
 ---
@@ -109,12 +106,6 @@ Activate it.
 source .venv/bin/activate
 ```
 
-### Windows
-
-```bash
-.venv\Scripts\activate
-```
-
 Install dependencies.
 
 ```bash
@@ -125,7 +116,7 @@ pip install -r requirements.txt
 
 ## Prepare Dataset
 
-Place all PDFs inside the `data/` directory.
+Place all PDFs inside the `data/` directory. For running this experiment we have got the data from the https://pmc.ncbi.nlm.nih.gov/?utm_source=chatgpt.com which have open access pdfs.
 
 Example:
 
@@ -216,76 +207,130 @@ The application first displays the retrieved chunks before generating the final 
 
 ---
 
-## Sample Output
+Ask a question (or 'exit'): What routes of administration are most frequently used?
 
-```
 ========== Retrieved Chunks ==========
 
-1. OECD407.pdf
-Distance : 0.61
+1. 9789264070684-en.pdf
+Distance : 1.6317
+ and at least once a week
+thereafter, detailed clinical observations should be made in all animals.  These observations should be
+made outside the home cage in a standard arena and preferably at the same time of day on each occasion.
+They should be carefully recorded, preferably using scoring system
+------------------------------------------------------------
+2. 9789264070707-en.pdf
+Distance : 1.6413
+es on each occasion. They should be carefully
+recorded, preferably using scoring systems explicitly defined by the testing laboratory.
+Effort should be made to ensure that variations in the observation conditions are
+minimal. Signs noted should include, but not be limited to, changes in skin, fur, e
+------------------------------------------------------------
+3. 47459972dft-Generally Accepted Scientific Knowledge in Applications for Drugs Biological Products-Nonclinical.pdf
+Distance : 1.6425
+............................................................................................................. 1
+II.
+BACKGROUND ............................................................................................................... 2
+A.
+Nonclinical Studies and Their Role in Drug Development .
+------------------------------------------------------------
+4. M3_R2__Guideline.pdf
+Distance : 1.6591
+ting Authorization for Pharmaceuticals
+9
+products. It is recommended that these alternative approaches be discussed and agreed
+upon with the appropriate regulatory authority.  The use of any of these approaches can
+reduce overall animal use in drug development.
+Recommended starting doses and maximal
+------------------------------------------------------------
+5. 47459972dft-Generally Accepted Scientific Knowledge in Applications for Drugs Biological Products-Nonclinical.pdf
+Distance : 1.6628
+refer to both drugs
+under the Federal Food, Drug, and Cosmetic Act and biological products under the Public Health Service Act; and
+the term approval is intended to refer to approval and licensure of drug and biological product applications under the
+respective authorities.
+3 This guidance does not
+------------------------------------------------------------
+6. 9789264070707-en.pdf
+Distance : 1.6767
+et
+or dissolved in drinking water. The method of oral administration is dependent on the
+purpose of the study and the physical/chemical properties of the test material.
+15.
+Where necessary, the test chemical is dissolved or suspended in a suitable
+vehicle. It is recommended that, wherever possible,
+------------------------------------------------------------
+7. 9789264070707-en.pdf
+Distance : 1.6957
+e based on the results
+of repeated dose or range finding studies and should take into account any existing
+toxicological and toxicokinetic data available for the test compound or related materials.
+Unless limited by the physical-chemical nature or biological effects of the test chemical,
+the highest
+------------------------------------------------------------
+8. M3_R2__Guideline.pdf
+Distance : 1.6970
+inical studies or marketing unless there is
+significant toxicological concern (e.g., similar target organ toxicity).  This concern would
+be modified depending on the margins of safety and the ability to monitor the adverse
+effects in humans. If a study is being conducted to address a cause for signi
+------------------------------------------------------------
+9. M3_R2__Guideline.pdf
+Distance : 1.6994
+ill
+have
+product
+information
+recommendations for co-use with a specific drug, even if not in a fixed combination, and
+for which there is minimal clinical information regarding the combination.
+Combinations covered might involve: (1) two or more late stage entities (defined as
+compounds with signific
+------------------------------------------------------------
+10. 47459972dft-Generally Accepted Scientific Knowledge in Applications for Drugs Biological Products-Nonclinical.pdf
+Distance : 1.7029
+ drug's particular mode of administration or
+conditions of use.”)
+10 See, for example, § 314.50(d)(2).  See also the BLA regulations at 21 CFR part 601, which are silent with respect
+to the source of nonclinical data.
+Contains Nonbinding Recommendations
+Draft — Not for Implementation
+3
+• Identify sp
+------------------------------------------------------------
+11. 9789264070707-en.pdf
+Distance : 1.7039
+observations should be kept for an appropriate period without treatment to detect
+persistence of, or recovery from toxic effects.
+24.
+General clinical observations should be made at least once a day, preferably
+at the same time(s) each day, taking into consideration the peak period of anticipated
+ef
+------------------------------------------------------------
+12. main (1).pdf
+Distance : 1.7104
+y, availability, and safety [1–3]. Often
+plants and plants derived products have been a therapeutic tool for
+treating disease and health hazards [4]. Nowadays the number of people
+affected with complex chronic diseases is increasing and drugs derived
+from medicinal plants are being proved to be an e
+------------------------------------------------------------
 
-...
-
-2. Study_A.pdf
-Distance : 0.63
-
-...
+Generating Answer...
 
 ========== Answer ==========
 
-Repeated-dose oral toxicity studies commonly evaluate body weight,
-food consumption, hematology, clinical chemistry and histopathology.
+Oral administration—typically by gavage, mixed in the diet, or dissolved in drinking water.
 
-These endpoints are consistently described across OECD 407 and
-multiple published studies.
-```
 
----
-
-## Current Limitations
-
-This project intentionally keeps the implementation simple.
-
-Current limitations include:
-
-- Fixed-size character chunking
-- No reranking
-- No metadata filtering
-- No hybrid search
-- Small document corpus
-- Basic prompting
-
-These trade-offs were made to keep the MVP focused on understanding the fundamentals of RAG.
-
----
-
-## Future Improvements
-
-- Paragraph-aware chunking
-- Metadata extraction (species, dose, duration, route)
-- Hybrid search (keyword + vector)
-- Cross-encoder reranking
-- Citation-aware responses
-- Web interface
-- Support for additional scientific domains
-
----
 
 ## What I Learned
 
-Building this project provided hands-on experience with:
-
-- semantic embeddings
-- vector databases
-- document chunking strategies
-- retrieval tuning
-- prompt grounding
-- practical RAG system design
-
-One important observation during development was that retrieval quality depended significantly on the **Top-K** parameter. Increasing the number of retrieved chunks improved recall for broader research questions while maintaining answer quality.
-
+Trade offs that need to be aware of
+1. Your use case requires the retrieval of information or search. If not you will be unnecessarily fittting RAG solution to a problem that doesnt demand it.
+2. Quality of data is very important. Because if LLM is prevented for hallusinating and asked to used your provided context. Then this boils down to how much quality data you have.
+3. During this excercise found out that simply by increasing value of K we were able to provide good context to LLM however in production systems as the value of K increase the token usage will start increasing as well. Thats why rerankers are useful.
+4. Data cleaning and transformation could help improve data quality drastically. Like in the above excercise I did not removed the redundant sections like references or introduction from research papers, so, the chunks were carrying garbage information.
+5. Search algorithms and distance metrics are main driving factors in any vector search. Algorithm is chosen based on the dataset size and distance metrics are chose based on use case for example - chat based cases requires text handling, and the cosine similarity works best in that case. while if use case demands image retrieval them maybe euclidian distance is more appropriate.
+6. Production systems are messier cause it will involve changing data changing business requirement changing infrastructure resources. And hence monitoring would be very crucial.
 ---
 
-## License
 
-MIT
