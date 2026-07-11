@@ -207,6 +207,7 @@ The application first displays the retrieved chunks before generating the final 
 
 ---
 
+## Sample Output
 Ask a question (or 'exit'): What routes of administration are most frequently used?
 
 ========== Retrieved Chunks ==========
