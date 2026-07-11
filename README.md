@@ -255,9 +255,7 @@ respective authorities.
 Distance : 1.6767
 et
 or dissolved in drinking water. The method of oral administration is dependent on the
-purpose of the study and the physical/chemical properties of the test material.
-15.
-Where necessary, the test chemical is dissolved or suspended in a suitable
+purpose of the study and the physical/chemical properties of the test material. Where necessary, the test chemical is dissolved or suspended in a suitable
 vehicle. It is recommended that, wherever possible,
 ------------------------------------------------------------
 7. 9789264070707-en.pdf
@@ -300,11 +298,8 @@ Draft — Not for Implementation
 11. 9789264070707-en.pdf
 Distance : 1.7039
 observations should be kept for an appropriate period without treatment to detect
-persistence of, or recovery from toxic effects.
-24.
-General clinical observations should be made at least once a day, preferably
-at the same time(s) each day, taking into consideration the peak period of anticipated
-ef
+persistence of, or recovery from toxic effects. General clinical observations should be made at least once a day, preferably
+at the same time(s) each day, taking into consideration the peak period of anticipated ef
 ------------------------------------------------------------
 12. main (1).pdf
 Distance : 1.7104
@@ -323,7 +318,7 @@ Oral administration—typically by gavage, mixed in the diet, or dissolved in dr
 
 
 
-## What I Learned
+## Learnings
 
 Trade offs that need to be aware of
 1. Your use case requires the retrieval of information or search. If not you will be unnecessarily fittting RAG solution to a problem that doesnt demand it.
